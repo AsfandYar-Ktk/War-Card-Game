@@ -111,6 +111,7 @@ class War:
         self.table = []
         self.is_war = False
         self.game_over = False
+        self.round_num = 1
     
     def get_card_heirarchy(card):
         card_str = card[1:]
@@ -129,10 +130,10 @@ class War:
     def Gameplay(self):
 
         while(not self.player_one.is_hand_empty() or not self.player_two.is_hand_empty()):
-                
+            print(".: ~~> Round Number : {} <~~ :.".format(self.round_num))
+            
             #IF is war, draw 4 and compare last 2 drawn
             #If not, draw 1 and compare
-
             for i in range(1+ int(self.is_war)*3):
                 self.table.append(self.player_one.draw_card())
                 self.table.append(self.player_two.draw_card())
@@ -142,21 +143,26 @@ class War:
             
             if(self.game_over):
                 break
-            print("Player 1 {} vs {} Player 2".format(self.table[0], self.table[1]))
+            print('#'*len(self.player_one.player_hand), " Player 1 {one} vs {two} Player 2 ".format(one = self.table[-2], two = self.table[-1]), '#'*len(self.player_two.player_hand))
             
-            if(War.get_card_heirarchy(self.table[0]) > War.get_card_heirarchy(self.table[1])):
+            if(War.get_card_heirarchy(self.table[-2]) > War.get_card_heirarchy(self.table[-1])):
                 self.player_one.add_cards(self.table)
                 self.table = []
                 self.is_war = False
                 print("Player 1 Wins!")
-            elif(War.get_card_heirarchy(self.table[0]) < War.get_card_heirarchy(self.table[1])):
+            elif(War.get_card_heirarchy(self.table[-2]) < War.get_card_heirarchy(self.table[-1])):
                 self.player_two.add_cards(self.table)
                 self.table = []
                 self.is_war = False
                 print("Player 2 Wins!")
             else:
                 self.is_war = True
-            
+                print("!!! WAR !!!")
+
+            # print(self.player_one.player_name, self.player_one.player_hand)
+            # print(self.player_two.player_name, self.player_two.player_hand)
+
+            self.round_num += 1
 
         print("Game Over!")
         if(self.player_one.is_hand_empty()):
@@ -179,16 +185,9 @@ gameDeck.shuffle_deck()
 d1, d2 = gameDeck.split_deck()
 
 
-#Initializing the hands and handing the split Deck to each hand
-p1Hand = Hand(d1)
-print(p1Hand.get_hand())
-
-p1Hand.add_cards(["He", 'eh'])
-print(p1Hand.draw_card())
-print(p1Hand.get_hand())
-
 # Use the 3 classes along with some logic to play a game of war!
-me = Player("Khattak", d1)
+player_name = input("Enter Your Name: ")
+me = Player(player_name, d1)
 print(me)
 
 comp = Player("Computar", d2)
