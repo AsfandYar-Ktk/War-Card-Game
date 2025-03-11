@@ -2,6 +2,8 @@
 
 This is an object-oriented implementation of the classic card game **War**, developed as part of the *Python and Django Full Stack Web Developer Bootcamp 2023* course. The game is played between a user and the computer, following a structured set of rules.  
 
+![image](https://github.com/user-attachments/assets/9723b362-3c37-4f1a-992f-fc49f4593aa3)
+
 ## **Game Rules (Implementation-Specific)**  
 - Each player draws **one card** from their deck. The player with the higher card wins and takes both cards.  
 - If both cards are **equal**, a **War** occurs:  
