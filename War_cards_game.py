@@ -143,7 +143,7 @@ class War:
             
             if(self.game_over):
                 break
-            print('#'*len(self.player_one.player_hand), " Player 1 {one} vs {two} Player 2 ".format(one = self.table[-2], two = self.table[-1]), '#'*len(self.player_two.player_hand))
+            print('#'*len(self.player_one.player_hand), self.player_one.get_player_name(), " {one} vs {two} ".format(one = self.table[-2], two = self.table[-1]), self.player_two.get_player_name(),  '#'*len(self.player_two.player_hand))
             
             if(War.get_card_heirarchy(self.table[-2]) > War.get_card_heirarchy(self.table[-1])):
                 self.player_one.add_cards(self.table)
